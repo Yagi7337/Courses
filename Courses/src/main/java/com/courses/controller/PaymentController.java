@@ -1,6 +1,7 @@
 package com.courses.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.courses.components.entity.Course;
 import com.courses.components.entity.Payment;
 import com.courses.service.PaymentService;
 
@@ -43,5 +45,10 @@ public class PaymentController {
 	 public Payment getByIdPayment(@PathVariable("id") Integer id){
 	 return paymentService.getByIdPayment(id);
 	 }
+	 
+	@RequestMapping(value = "/course/{id}", method = RequestMethod.GET)
+	public Set<Course> getAllCourse(@PathVariable("id") int id) {
+		return paymentService.getAllCourse(id);
+	}	 
 
 }
