@@ -2,11 +2,15 @@ package com.courses.components.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.courses.components.entity.Course;
 import com.courses.components.entity.Payment;
 import com.courses.components.interfaces.IPayment;
 import com.courses.components.persistence.HibernateUtil;
@@ -74,4 +78,19 @@ public class PaymentDao implements IPayment{
 	 }
 	 return result;
 	 }
+	 
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public Set<Course> getAllCourse(int id) {
+		try {
+			Session session = HibernateUtil.getSessionFactory().openSession();
+			session.beginTransaction();
+			Payment payment = (Payment) session.get(Payment.class, id);
+			session.getTransaction().commit();
+			return payment.getCourseForPayment();
+			
+		} catch (Exception e) {
+				throw e;
+		}
+	}
 }

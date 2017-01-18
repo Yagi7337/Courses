@@ -1,10 +1,12 @@
 package com.courses.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.courses.components.entity.Course;
 import com.courses.components.entity.Payment;
 import com.courses.components.interfaces.IPayment;
 
@@ -31,5 +33,9 @@ public class PaymentService {
 	
 	public Payment getByIdPayment(Integer id){
 		return iPayment.getByIdPayment(id);
+	}
+	
+	public Set<Course> getAllCourse(int id) {
+		return iPayment.getAllCourse(id);
 	}
 }
