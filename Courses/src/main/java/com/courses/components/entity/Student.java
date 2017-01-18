@@ -1,6 +1,7 @@
 package com.courses.components.entity;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,12 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Teacher")
-public class Teacher implements Serializable {
+@Table(name = "Student")
+public class Student implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "ID")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
@@ -28,23 +29,17 @@ public class Teacher implements Serializable {
 	@Column(name = "fname")
 	private String fname;
 	
-	@Column(name = "telephone")
-	private String telephone;
-	
 	@Column(name = "email")
 	private String email;
 	
-	public Teacher() {
-	}
+	@Column(name = "telephone")
+	private String telephone;
+	
+	@Column(name = "date_registrarion")
+	private Date date_registrarion;
 
-	public Teacher(Integer id, String name, String surname, String fname, String telephone, String email) {
-		this.id = id;
-		this.name = name;
-		this.surname = surname;
-		this.fname = fname;
-		this.telephone = telephone;
-		this.email = email;
-	}
+	@Column(name = "id_Group")
+	private Integer id_Group;
 	
 	public Integer getId() {
 		return id;
@@ -78,14 +73,6 @@ public class Teacher implements Serializable {
 		this.fname = fname;
 	}
 
-	public String getTelephone() {
-		return telephone;
-	}
-
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -94,10 +81,41 @@ public class Teacher implements Serializable {
 		this.email = email;
 	}
 
-	// @Override
-	// public String toString() {
-	// return "Teacher [id=" + id + ", name=" + name + ", surname=" + surname +
-	// "]";
-	// }
+	public String getTelephone() {
+		return telephone;
+	}
 
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+
+	public Date getDate_registrarion() {
+		return date_registrarion;
+	}
+
+	public void setDate_registrarion(Date date_registrarion) {
+		this.date_registrarion = date_registrarion;
+	}
+
+	public Integer getId_Group() {
+		return id_Group;
+	}
+
+	public void setId_Group(Integer id_Group) {
+		this.id_Group = id_Group;
+	}
+
+	public Student() {
+	}
+
+	public Student(Integer id, String name, String surname, String fname, String email, String telephone, Date date_registrarion, Integer id_Group) {
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
+		this.fname = fname;
+		this.email = email;
+		this.telephone = telephone;
+		this.date_registrarion = date_registrarion;
+		this.id_Group = id_Group;
+	}
 }

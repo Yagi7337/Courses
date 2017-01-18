@@ -7,17 +7,17 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
-import com.courses.components.interfaces.ITeacher;
+import com.courses.components.entity.Course;
+import com.courses.components.interfaces.ICourse;
 import com.courses.components.persistence.HibernateUtil;
-import com.courses.components.entity.Teacher;
 
 @Repository
-public class TeacherDao implements ITeacher {
+public class CourseDao implements ICourse{
 	@Override
-	public void createTeacher(Teacher teacher) {
+	public void createCourse(Course course) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
-		session.save(new Teacher(teacher.getId(), teacher.getName(), teacher.getSurname(), teacher.getFname(), teacher.getTelephone(), teacher.getEmail()));
+		session.save(new Course(course.getId(), course.getName(), course.getCount_week(), course.getCount_lesson_week(), course.getPrice_month(), course.getId_Payment()));
 		session.getTransaction().commit();
 		if (session.isOpen()) {
 			session.close();
@@ -25,11 +25,11 @@ public class TeacherDao implements ITeacher {
 	}
 
 	@Override
-	public List<Teacher> readAllTeacher() {
+	public List<Course> readAllCourse() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
-		Query SQLQuery = session.createQuery("select t from Teacher t");
-		ArrayList<Teacher> result = (ArrayList<Teacher>) SQLQuery.list();
+		Query SQLQuery = session.createQuery("select t from Course t");
+		ArrayList<Course> result = (ArrayList<Course>) SQLQuery.list();
 		session.getTransaction().commit();
 		if (session.isOpen()) {
 			session.close();
@@ -38,12 +38,15 @@ public class TeacherDao implements ITeacher {
 	}
 
 	@Override
-	public void updateTeacher(Integer id, Teacher teacher) {
+	public void updateCourse(Integer id, Course course) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
-		Teacher update = (Teacher) session.get(Teacher.class, id);
-		update.setName(teacher.getName());
-		update.setSurname(teacher.getSurname());
+		Course update = (Course) session.get(Course.class, id);
+		update.setName(course.getName());
+		update.setCount_week(course.getCount_week());
+		update.setCount_lesson_week(course.getCount_lesson_week());
+		update.setPrice_month(course.getPrice_month());
+		update.setId_Payment(course.getId_Payment());
 		session.update(update);
 		session.getTransaction().commit();
 		if (session.isOpen()) {
@@ -53,10 +56,10 @@ public class TeacherDao implements ITeacher {
 	}
 
 	@Override
-	public void deleteTeacher(Integer id) {
+	public void deleteCourse(Integer id) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
-		Teacher del = (Teacher) session.get(Teacher.class, id);
+		Course del = (Course) session.get(Course.class, id);
 		session.delete(del);
 		session.getTransaction().commit();
 		if (session.isOpen()) {
@@ -65,15 +68,14 @@ public class TeacherDao implements ITeacher {
 	}
 
 	 @Override
-	 public Teacher getByIdTeacher(Integer id) {
+	 public Course getByIdCourse(Integer id) {
 	 Session session = HibernateUtil.getSessionFactory().openSession();
 	 session.beginTransaction();
-	 Teacher result = (Teacher) session.get(Teacher.class, id);
+	 Course result = (Course) session.get(Course.class, id);
 	 session.getTransaction().commit();
 	 if (session.isOpen()) {
 	 session.close();
 	 }
 	 return result;
 	 }
-
 }

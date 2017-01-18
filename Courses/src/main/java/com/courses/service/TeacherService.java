@@ -29,8 +29,8 @@ public class TeacherService {
 		iTeacher.deleteTeacher(id);
 	}
 	
-//	public Teacher getById(Integer id){
-//		return iTeacherDao.getById(id);
-//	}
+	public Teacher getByIdTeacher(Integer id){
+		return iTeacher.getByIdTeacher(id);
+	}
 
 }
