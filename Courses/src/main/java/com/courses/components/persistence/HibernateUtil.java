@@ -1,4 +1,4 @@
-package com.courses.service;
+package com.courses.components.persistence;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
