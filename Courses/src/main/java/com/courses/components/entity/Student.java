@@ -21,26 +21,12 @@ public class Student implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	@Column(name = "name")
 	private String name;
-	
-	@Column(name = "surname")
 	private String surname;
-	
-	@Column(name = "fname")
 	private String fname;
-	
-	@Column(name = "email")
 	private String email;
-	
-	@Column(name = "telephone")
 	private String telephone;
-	
-	@Column(name = "date_registrarion")
 	private Date date_registrarion;
 
 	@ManyToOne(fetch = FetchType.LAZY)

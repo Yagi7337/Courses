@@ -21,11 +21,7 @@ public class Payment implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-
-	@Column(name = "name")
 	private String name;
 
 	@OneToMany(mappedBy = "id_Payment", fetch = FetchType.EAGER)

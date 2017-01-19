@@ -13,24 +13,13 @@ public class Teacher implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "id")
 	private Integer id;
-	
-	@Column(name = "name")
 	private String name;
-	
-	@Column(name = "surname")
 	private String surname;
-	
-	@Column(name = "fname")
 	private String fname;
-	
-	@Column(name = "telephone")
 	private String telephone;
-	
-	@Column(name = "email")
 	private String email;
-	
+
 	public Teacher() {
 	}
 
@@ -42,7 +31,7 @@ public class Teacher implements Serializable {
 		this.telephone = telephone;
 		this.email = email;
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}

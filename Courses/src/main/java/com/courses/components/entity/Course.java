@@ -24,24 +24,13 @@ public class Course implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	@Column(name = "name")
 	private String name;
-	
-	@Column(name = "count_week")
 	private Integer count_week;
-	
-	@Column(name = "count_lesson_week")
 	private Float count_lesson_week;
-	
-	@Column(name = "price_month")
 	private Float price_month;
 	
-//	@ManyToOne(fetch = FetchType.LAZY)
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JsonBackReference
 	@JoinColumn(name = "id_Payment")
 	private Payment id_Payment;

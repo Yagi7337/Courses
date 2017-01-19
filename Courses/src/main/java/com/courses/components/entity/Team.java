@@ -24,17 +24,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class Team implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
-	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-
-	@Column(name = "name")
 	private String name;
-	
-	@Column(name = "date_start")
 	private Date date_start;
-	
-	@Column(name = "date_end")
 	private Date date_end;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
