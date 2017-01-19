@@ -10,8 +10,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.courses.components.entity.Course;
 import com.courses.components.entity.Student;
+import com.courses.components.entity.Teacher;
 import com.courses.components.entity.Team;
 import com.courses.components.interfaces.ITeam;
 import com.courses.components.persistence.HibernateUtil;
@@ -34,7 +34,7 @@ public class TeamDao implements ITeam{
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
 		Query SQLQuery = session.createQuery("select t from Team t");
-		ArrayList<Team> result = (ArrayList<Team>) SQLQuery.list();
+		ArrayList<Team> result = (ArrayList<Team>)SQLQuery.list();
 		session.getTransaction().commit();
 		if (session.isOpen()) {
 			session.close();
@@ -92,6 +92,20 @@ public class TeamDao implements ITeam{
 			Team team = (Team) session.get(Team.class, id);
 			session.getTransaction().commit();
 			return team.getStudentForTeam();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+	
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public Set<Teacher> getAllTeacher(int id) {
+		try {
+			Session session = HibernateUtil.getSessionFactory().openSession();
+			session.beginTransaction();
+			Team team = (Team) session.get(Team.class, id);
+			session.getTransaction().commit();
+			return team.getTeachers();
 		} catch (Exception e) {
 			throw e;
 		}

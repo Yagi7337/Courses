@@ -17,4 +17,6 @@ public interface ITeacher {
 
 	public Teacher getByIdTeacher(Integer id);
 	
+	public Set<Team> getAllTeam(int id);
+	
 }

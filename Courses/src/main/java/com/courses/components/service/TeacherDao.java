@@ -81,4 +81,17 @@ public class TeacherDao implements ITeacher {
 		return result;
 	}
 
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public Set<Team> getAllTeam(int id) {
+		try {
+			Session session = HibernateUtil.getSessionFactory().openSession();
+			session.beginTransaction();
+			Teacher teacher = (Teacher) session.get(Teacher.class, id);
+			session.getTransaction().commit();
+			return teacher.getTeams();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
 }
