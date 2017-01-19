@@ -1,11 +1,13 @@
 package com.courses.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.courses.components.entity.Course;
+import com.courses.components.entity.Team;
 import com.courses.components.interfaces.ICourse;
 
 @Service
@@ -31,5 +33,9 @@ public class CourseService {
 	
 	public Course getByIdCourse(Integer id){
 		return iCourse.getByIdCourse(id);
+	}
+	
+	public Set<Team> getAllTeam(int id) {
+		return iCourse.getAllTeam(id);
 	}
 }

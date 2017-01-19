@@ -2,11 +2,16 @@ package com.courses.components.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.courses.components.entity.Course;
+import com.courses.components.entity.Student;
 import com.courses.components.entity.Team;
 import com.courses.components.interfaces.ITeam;
 import com.courses.components.persistence.HibernateUtil;
@@ -77,4 +82,18 @@ public class TeamDao implements ITeam{
 	 }
 	 return result;
 	 }
+	 
+	@Override
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	public Set<Student> getAllStudent(int id) {
+		try {
+			Session session = HibernateUtil.getSessionFactory().openSession();
+			session.beginTransaction();
+			Team team = (Team) session.get(Team.class, id);
+			session.getTransaction().commit();
+			return team.getStudentForTeam();
+		} catch (Exception e) {
+			throw e;
+		}
+	}
 }

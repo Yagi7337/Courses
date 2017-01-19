@@ -5,10 +5,15 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "Student")
@@ -38,9 +43,19 @@ public class Student implements Serializable {
 	@Column(name = "date_registrarion")
 	private Date date_registrarion;
 
-	@Column(name = "id_Group")
-	private Integer id_Group;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonBackReference
+	@JoinColumn(name = "id_Team")
+	private Team id_Team;
 	
+	public Team getId_Team() {
+		return id_Team;
+	}
+
+	public void setId_Team(Team id_Team) {
+		this.id_Team = id_Team;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -97,18 +112,10 @@ public class Student implements Serializable {
 		this.date_registrarion = date_registrarion;
 	}
 
-	public Integer getId_Group() {
-		return id_Group;
-	}
-
-	public void setId_Group(Integer id_Group) {
-		this.id_Group = id_Group;
-	}
-
 	public Student() {
 	}
 
-	public Student(Integer id, String name, String surname, String fname, String email, String telephone, Date date_registrarion, Integer id_Group) {
+	public Student(Integer id, String name, String surname, String fname, String email, String telephone, Date date_registrarion, Team id_Team) {
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
@@ -116,6 +123,6 @@ public class Student implements Serializable {
 		this.email = email;
 		this.telephone = telephone;
 		this.date_registrarion = date_registrarion;
-		this.id_Group = id_Group;
+		this.id_Team = id_Team;
 	}
 }

@@ -1,6 +1,7 @@
 package com.courses.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.courses.components.entity.Teacher;
+import com.courses.components.entity.Team;
 import com.courses.service.TeacherService;
 
 @RestController

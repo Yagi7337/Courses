@@ -2,6 +2,7 @@ package com.courses.components.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -9,7 +10,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.courses.components.entity.Course;
 import com.courses.components.entity.Student;
+import com.courses.components.entity.Team;
 import com.courses.components.interfaces.IStudent;
 import com.courses.components.persistence.HibernateUtil;
 
@@ -57,7 +60,7 @@ public class StudentDao implements IStudent {
 			update.setEmail(student.getEmail());
 			update.setTelephone(student.getTelephone());
 			update.setDate_registrarion(student.getDate_registrarion());
-			update.setId_Group(student.getId_Group());
+			update.setId_Team(student.getId_Team());
 			session.update(update);
 //			session.getTransaction().commit();
 		} catch (Exception e) {
@@ -91,4 +94,5 @@ public class StudentDao implements IStudent {
 			throw e;
 		}
 	}
+	
 }

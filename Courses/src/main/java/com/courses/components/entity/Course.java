@@ -1,6 +1,8 @@
 package com.courses.components.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,9 +12,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "Course")
@@ -36,12 +40,24 @@ public class Course implements Serializable{
 	@Column(name = "price_month")
 	private Float price_month;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+//	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JsonBackReference
 	@JoinColumn(name = "id_Payment")
-//	@Column(name = "id_Payment")
 	private Payment id_Payment;
 	
+	@OneToMany(mappedBy = "id_Course", fetch = FetchType.EAGER)
+	@JsonManagedReference
+	Set<Team> teamForCourse = new HashSet<>();
+	
+	public Set<Team> getTeamForCourse() {
+		return teamForCourse;
+	}
+
+	public void setTeamForCourse(Set<Team> teamForCourse) {
+		this.teamForCourse = teamForCourse;
+	}
+
 	public Payment getId_Payment() {
 		return id_Payment;
 	}
