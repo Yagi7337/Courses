@@ -1,10 +1,14 @@
 package com.courses.components.entity;
 
 import java.io.Serializable;
+import java.util.Set;
 
-import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,6 +23,22 @@ public class Teacher implements Serializable {
 	private String fname;
 	private String telephone;
 	private String email;
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name="TeamTeacher",
+	        joinColumns = @JoinColumn(name="id_Teacher", referencedColumnName="id"),
+	        inverseJoinColumns = @JoinColumn(name="id_Team", referencedColumnName="id")
+	)
+	private Set<Team> teams;
+
+
+	public Set<Team> getTeams() {
+		return teams;
+	}
+
+	public void setTeams(Set<Team> teams) {
+		this.teams = teams;
+	}
 
 	public Teacher() {
 	}

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.courses.components.entity.Student;
+import com.courses.components.entity.Teacher;
 import com.courses.components.entity.Team;
 import com.courses.components.interfaces.ITeam;
 
@@ -37,5 +38,9 @@ public class TeamService {
 	
 	public Set<Student> getAllStudent(int id) {
 		return iTeam.getAllStudent(id);
+	}
+	
+	public Set<Teacher> getAllTeacher(int id) {
+		return iTeam.getAllTeacher(id);
 	}
 }

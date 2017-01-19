@@ -34,5 +34,9 @@ public class TeacherService {
 	public Teacher getByIdTeacher(Integer id) {
 		return iTeacher.getByIdTeacher(id);
 	}
+	
+	public Set<Team> getAllTeam(int id) {
+		return iTeacher.getAllTeam(id);
+	}
 
 }

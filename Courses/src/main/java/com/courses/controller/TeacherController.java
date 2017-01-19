@@ -27,7 +27,7 @@ public class TeacherController {
 	}
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public List<Teacher> readALlTeacher() {
+	public List<Teacher> readAllTeacher() {
 		return teacherService.readAllTeacher();
 	}
 
@@ -46,4 +46,8 @@ public class TeacherController {
 		return teacherService.getByIdTeacher(id);
 	}
 
+	@RequestMapping(value = "/team/{id}", method = RequestMethod.GET)
+	public Set<Team> getAllTeam(@PathVariable("id") int id) {
+		return teacherService.getAllTeam(id);
+	}
 }

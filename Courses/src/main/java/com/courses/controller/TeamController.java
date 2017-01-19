@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.courses.components.entity.Student;
+import com.courses.components.entity.Teacher;
 import com.courses.components.entity.Team;
 import com.courses.service.TeamService;
 
@@ -49,4 +50,9 @@ public class TeamController {
 	public Set<Student> getAllStudent(@PathVariable("id") int id) {
 		return teamService.getAllStudent(id);
 	}	
+	
+	@RequestMapping(value = "/teacher/{id}", method = RequestMethod.GET)
+	public Set<Teacher> getAllTeacher(@PathVariable("id") int id) {
+		return teamService.getAllTeacher(id);
+	}
 }

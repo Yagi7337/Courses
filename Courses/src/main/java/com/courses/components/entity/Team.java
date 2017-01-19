@@ -5,18 +5,17 @@ import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -38,6 +37,18 @@ public class Team implements Serializable {
 	@JsonManagedReference
 	private Set<Student> studentForTeam = new HashSet<>();
 	
+	@JsonIgnore
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "teams")
+	private Set<Teacher> teachers;
+	
+	public Set<Teacher> getTeachers() {
+		return teachers;
+	}
+
+	public void setTeachers(Set<Teacher> teachers) {
+		this.teachers = teachers;
+	}
+
 	public Set<Student> getStudentForTeam() {
 		return studentForTeam;
 	}
