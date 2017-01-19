@@ -2,14 +2,18 @@ package com.courses.components.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.courses.components.interfaces.ITeacher;
 import com.courses.components.persistence.HibernateUtil;
 import com.courses.components.entity.Teacher;
+import com.courses.components.entity.Team;
 
 @Repository
 public class TeacherDao implements ITeacher {
@@ -17,7 +21,8 @@ public class TeacherDao implements ITeacher {
 	public void createTeacher(Teacher teacher) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
-		session.save(new Teacher(teacher.getId(), teacher.getName(), teacher.getSurname(), teacher.getFname(), teacher.getTelephone(), teacher.getEmail()));
+		session.save(new Teacher(teacher.getId(), teacher.getName(), teacher.getSurname(), teacher.getFname(),
+				teacher.getTelephone(), teacher.getEmail()));
 		session.getTransaction().commit();
 		if (session.isOpen()) {
 			session.close();
@@ -64,16 +69,16 @@ public class TeacherDao implements ITeacher {
 		}
 	}
 
-	 @Override
-	 public Teacher getByIdTeacher(Integer id) {
-	 Session session = HibernateUtil.getSessionFactory().openSession();
-	 session.beginTransaction();
-	 Teacher result = (Teacher) session.get(Teacher.class, id);
-	 session.getTransaction().commit();
-	 if (session.isOpen()) {
-	 session.close();
-	 }
-	 return result;
-	 }
+	@Override
+	public Teacher getByIdTeacher(Integer id) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		Teacher result = (Teacher) session.get(Teacher.class, id);
+		session.getTransaction().commit();
+		if (session.isOpen()) {
+			session.close();
+		}
+		return result;
+	}
 
 }

@@ -30,7 +30,7 @@ public class Payment implements Serializable {
 
 	@OneToMany(mappedBy = "id_Payment", fetch = FetchType.EAGER)
 	@JsonManagedReference
-	Set<Course> courseForPayment = new HashSet<>();
+	private Set<Course> courseForPayment = new HashSet<>();
 
 	public Set<Course> getCourseForPayment() {
 		return courseForPayment;
