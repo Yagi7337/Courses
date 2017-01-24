@@ -6,6 +6,8 @@ import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,11 +18,12 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@Table(name = "Course")
+@Table
 public class Course implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
 	private Integer count_week;
@@ -32,7 +35,7 @@ public class Course implements Serializable{
 	@JoinColumn(name = "id_Payment")
 	private Payment id_Payment;
 	
-	@OneToMany(mappedBy = "id_Course", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "id_Course", fetch=FetchType.EAGER)
 	@JsonManagedReference
 	Set<Team> teamForCourse = new HashSet<>();
 	

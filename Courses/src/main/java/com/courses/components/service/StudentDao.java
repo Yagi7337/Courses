@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,6 +44,19 @@ public class StudentDao implements IStudent {
 			throw e;
 		}
 	}
+	
+//	 @Override
+//	 public List<Student> readAllStudent() {
+//	 Session session = HibernateUtil.getSessionFactory().openSession();
+//	 session.beginTransaction();
+//	 List<Student> team=(List<Student>)session.createCriteria(Student.class).createAlias("id_Team",
+//	 "iC").add(Restrictions.eq("iC.name", "PR131")).list();
+//	 session.getTransaction().commit();
+//	 if (session.isOpen()) {
+//	 session.close();
+//	 }
+//	 return team;
+//	 }
 
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)

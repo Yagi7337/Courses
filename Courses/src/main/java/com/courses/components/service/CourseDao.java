@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,6 +42,20 @@ public class CourseDao implements ICourse{
 		}
 		return result;
 	}
+	
+//	 @Override
+//	 public List<Course> readAllCourse() {
+//	 Session session = HibernateUtil.getSessionFactory().openSession();
+//	 session.beginTransaction();
+//	 List<Course> team=(List<Course>)session.createCriteria(Course.class)
+//			 .createAlias("id_Payment", "iD")
+//			 .add(Restrictions.eq("iD.id", 2)).list();
+//	 session.getTransaction().commit();
+//	 if (session.isOpen()) {
+//	 session.close();
+//	 }
+//	 return team;
+//	 }
 
 	@Override
 	public void updateCourse(Integer id, Course course) {

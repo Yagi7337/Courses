@@ -15,6 +15,7 @@ import com.courses.components.entity.Teacher;
 import com.courses.components.entity.Team;
 import com.courses.service.TeamService;
 
+
 @RestController
 @RequestMapping(value = "/team")
 public class TeamController {
@@ -29,6 +30,16 @@ public class TeamController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public List<Team> readAllTeam() {
 		return teamService.readAllTeam();
+	}
+	
+	@RequestMapping(value = "/list2", method = RequestMethod.GET)
+	public List<Team> readAllTeamTeam() {
+		return teamService.readAllTeamTeam();
+	}
+	
+	@RequestMapping(value = "/list3", method = RequestMethod.GET)
+	public List<Team> readAllTeamTeamTeam() {
+		return teamService.readAllTeamTeamTeam();
 	}
 
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.PUT)
@@ -49,8 +60,8 @@ public class TeamController {
 	@RequestMapping(value = "/student/{id}", method = RequestMethod.GET)
 	public Set<Student> getAllStudent(@PathVariable("id") int id) {
 		return teamService.getAllStudent(id);
-	}	
-	
+	}
+
 	@RequestMapping(value = "/teacher/{id}", method = RequestMethod.GET)
 	public Set<Teacher> getAllTeacher(@PathVariable("id") int id) {
 		return teamService.getAllTeacher(id);
