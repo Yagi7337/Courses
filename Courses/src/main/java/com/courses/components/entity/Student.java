@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -13,11 +14,12 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-@Table(name = "Student")
+@Table
 public class Student implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
 	private String surname;
@@ -26,7 +28,7 @@ public class Student implements Serializable {
 	private String telephone;
 	private Date date_registrarion;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JsonBackReference
 	@JoinColumn(name = "id_Team")
 	private Team id_Team;

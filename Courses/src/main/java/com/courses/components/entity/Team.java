@@ -7,6 +7,8 @@ import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -19,28 +21,30 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@Table(name = "Team")
+@Table
 public class Team implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
 	private Date date_start;
 	private Date date_end;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JsonBackReference
 	@JoinColumn(name = "id_Course")
 	private Course id_Course;
 	
-	@OneToMany(mappedBy = "id_Team", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "id_Team",  fetch = FetchType.EAGER)
 	@JsonManagedReference
 	private Set<Student> studentForTeam = new HashSet<>();
 	
-	@JsonIgnore
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "teams")
+	@ManyToMany(mappedBy = "teams")
 	private Set<Teacher> teachers;
 	
+	@JsonIgnore
 	public Set<Teacher> getTeachers() {
 		return teachers;
 	}
